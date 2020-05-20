@@ -1,0 +1,110 @@
+{\bf Model 2-1(no terminal cost):} Our optimization problem is:
+\begin{equation}
+    J(u,T)=\int_{0}^{T}\ln(u+1)dt\rightarrow \max_{u}\ s.t. \eqref{cd:initial_condition}
+\end{equation}
+\begin{enumerate}[a)]
+    \item Write down the Hamiltonian Function:
+            \begin{equation}\label{eq:hamiltonian2}
+                H(x,u,\psi)=\ln(u+1)+\psi (u-\delta)
+            \end{equation}
+    \item It's first order partial derivatives w.r.t $u$ is:
+            \begin{equation}
+                \frac{\partial }{\partial u}H(x,u,\psi)=\frac{1}{u+1}+\psi
+            \end{equation}
+             According to the first order extremality condition:
+             \begin{equation}\label{eq:optc_with_psi2}
+                u^*(t)=-\frac{1+\psi}{\psi}
+             \end{equation}
+             And $\frac{\partial^2 }{\partial u^2}H(x,u,\psi)\big|_{u=u^*}<0$, we can conclude that the Hamiltonian $H$ is concave w.r.t $u$.
+    \item We substituete \eqref{eq:optc_with_psi2} into \eqref{eq:hamiltonian2} to get the maximal Hamiltonian Function:
+             \begin{equation}
+                \mathcal{H}(x, \psi)=H(x,u^*,\psi)=-\ln(-\psi)-(1+\psi)-\psi\delta
+             \end{equation}
+    \item The canonical form is writen as:
+             \begin{equation}\label{eq:canonical_form2}
+                 \begin{dcases}
+                    \dot{x}= \frac{\partial }{\partial \psi}H(x,u,\psi)\bigg|_{u=u^*}=-\frac{1+\psi}{\psi}-\delta\\
+                    \dot{\psi}=-\frac{\partial }{\partial x}H(x,u,\psi)\bigg|_{u=u^*}=0
+                \end{dcases}
+             \end{equation}
+    \item From D.E.S \eqref{eq:canonical_form2}, it's not hard to find that $\psi(t)\equiv \psi_0$, $\psi_0$ is a constant.
+
+    \item According to D.E.S \eqref{eq:canonical_form2} and $\psi(t)\equiv \psi_0$, we can find the optimal trajectory:
+             \begin{equation}\label{eq:optx_with_psi02}
+                 x^*(t)=x_0-\bigg(\frac{1+\psi_0}{\psi_0}+\delta\bigg)t
+             \end{equation}
+    \item From Equation \eqref{eq:optx_with_psi02} and initial condition $x(T)=x_T$, we can find:
+             \begin{equation}
+                \psi(t)\equiv\psi_0=\frac{T}{x_0-x_T-T(1+\delta)} \label{eq:psi2}
+             \end{equation}
+
+    \item    Substitute $\psi_0$ into Equation \eqref{eq:optc_with_psi2}, we can find the optimal control:
+        \begin{equation}\label{eq:optc2}
+            u^*(t)\equiv\frac{x_T-x_0}{T}+\delta,\ \text{where}\ 0\leq\frac{x_T-x_0}{T}+\delta\leq b
+        \end{equation}
+    \item Substitute $\psi_0$ into Equation \eqref{eq:optx_with_psi02}, we can find the optimal trajectory:
+        \begin{equation}\label{eq:optx2}
+            x^*(t)=x_0+\frac{x_T-x_0}{T}t
+        \end{equation}
+    \item During the optimal control \eqref{eq:optc2}, the total profit is:
+        \begin{equation}
+            V=aJ(u^*,T)=-aT\ln(-\psi_0)=aT\biggl[\ln\big(x_T-x_0+T(1+\delta)\big)-\ln T\biggr]
+        \end{equation}
+\end{enumerate}
+
+{\bf Model 2-2(terminal cost):} Our optimization problem is:
+\begin{equation}
+    J(u,T)=\int_{0}^{T}\ln(u+1)dt-Dx(T)\rightarrow \max_{u}\ s.t. \eqref{cd:initial_condition}
+\end{equation}
+
+Same procedure as \textbf{Model 2-1} item a) to f). The difference between them is there are no boundary conditions on $\psi$ in Model 2-1. But for Model 2-2 is not.
+
+\begin{equation}
+    \psi(T)=\psi_0=-\frac{d}{dx}Dx(t)\bigg|_{t=T}=-D
+\end{equation}
+
+Hence, $\psi(t)\equiv-D$.
+
+\begin{itemize}
+    \item Substitute $\psi(t)\equiv-D$ into Equation \eqref{eq:optc_with_psi2}, we can find the optimal control:
+    \begin{equation}
+        u^*(t)=\frac{1-D}{D},\ \text{where}\ b\geq \frac{1-D}{D}
+    \end{equation}
+    \item Substitute $\psi(t)\equiv-D$ into Equation \eqref{eq:optx_with_psi02}, we get:
+    \begin{equation}
+        x^*(t)=x_0+\bigg(\frac{1-D}{D}-\delta\bigg)t
+    \end{equation}
+
+    Define $t^*=\frac{-x_0D}{1-D-D\delta}$.
+
+    There are also two cases for $x$: 
+
+    {\bf Case 1:} $u^*\geq\delta$
+    \begin{equation}
+        x^*(t)=x_0+\bigg(\frac{1-D}{D}-\delta\bigg)t
+    \end{equation}
+
+    {\bf Case 2:} $u^*<\delta$
+
+    \begin{equation}
+        \begin{dcases}
+            x^*(t)=x_0+\bigg(\frac{1-D}{D}-\delta\bigg)t & 0\leq t\leq t^*\\
+            x^*(t)=0 & t> t^*
+        \end{dcases}
+    \end{equation}
+
+    \item Finally, the optimal profit is:
+    \begin{itemize}
+        \item For $T\leq t^*$
+        \begin{gather}
+            \begin{aligned}
+                V=aJ(u^*,T)=-aT\ln D-a\big[Dx_0+(1-D-\delta D)T\big]
+            \end{aligned}
+        \end{gather}
+        \item For $T> t^*$, there are no terminal costs:
+        \begin{equation}
+            V=-aT\ln D
+        \end{equation}
+    \end{itemize}
+
+\end{itemize}
